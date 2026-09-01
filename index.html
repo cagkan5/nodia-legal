@@ -4,41 +4,225 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nodia Collective</title>
+<meta name="description" content="Kalabalık değil, çember. Niyetli bir topluluk — yakında.">
+<meta name="theme-color" content="#1E1913">
+<link rel="icon" href="favicon.ico" sizes="any">
+
+<!-- Paylaşım kartı: Play mağaza öne çıkan görselinin ta kendisi (1024x500).
+     Ayrı bir kart TASARLANMADI — marka kompozisyonu zaten onaylı ve yayında. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nodiacollective.com/">
+<meta property="og:title" content="Nodia Collective">
+<meta property="og:description" content="Kalabalık değil, çember. Niyetli bir topluluk — yakında.">
+<meta property="og:image" content="https://nodiacollective.com/varliklar/nodia-paylasim-karti.png">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preload" as="font" type="font/woff2" href="varliklar/cinzel-500.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="varliklar/cormorant-500-italic.woff2" crossorigin>
+
 <style>
+/* ════════════════════════════════════════════════════════════════════════
+   NODIA COLLECTIVE — kök sayfa.
+
+   ⛔ BU SAYFA HUKUK METİNLERİNDEN AYRIDIR. `kullanim-sartlari/` rıza hash'i
+      ailesindendir, `cocuk-guvenligi/` ise uygulamadaki güvenlik satırıyla
+      kelimesi kelimesine bağlıdır — ikisine de bu dosyadan DOKUNULMAZ.
+      Burada değişen tek şey markanın karşılama yüzeyidir.
+
+   ⭑ HİÇBİR ŞEY İCAT EDİLMEDİ: kompozisyon (enso + Cinzel kelime markası +
+      Cormorant italik slogan + Gece zemin + soluk halka/nokta dokusu) Play
+      öne çıkan görselinden birebir alındı; slogan da orada YAYINDA olan
+      metindir. Nefes animasyonunun değerleri uygulamanın K9 ekranıyla aynı
+      (opaklık .45↔.9 · ölçek 1↔1.06).
+
+   ⭑ DAİMA KOYU — bilinçli. Uygulamanın varsayılan teması 25 Ağu'da `system`
+      yerine `dark`'a çekildi; gerekçe aynen burada da geçerli: Gece lansman
+      rengidir ve markanın ilk izlenimi ziyaretçinin telefon ayarına
+      DEVREDİLMEZ. Splash, mağaza kareleri ve ikon zaten bu zemin üzerine
+      kurulu. (Hukuk sayfaları belge yüzeyidir; onlar iki temayı da destekler.)
+
+   ⭑ FONTLAR KENDİ SUNUCUMUZDA (varliklar/*.woff2), CDN'DEN DEĞİL. Google
+      Fonts kullanmak her ziyaretçinin IP'sini üçüncü tarafa gönderirdi ve
+      yayınlanmış Gizlilik Politikası web sitesi için böyle bir aktarım
+      BEYAN ETMİYOR — sayfa ile metni çelişirdi. Altkümelenmiş üç font
+      toplam ~28 KB; lisans: varliklar/FONT-LISANSLARI.txt (SIL OFL 1.1).
+   ════════════════════════════════════════════════════════════════════════ */
+
+@font-face{font-family:"Cinzel";src:url("varliklar/cinzel-500.woff2") format("woff2");
+  font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Cormorant Garamond";src:url("varliklar/cormorant-500-italic.woff2") format("woff2");
+  font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:"Jost";src:url("varliklar/jost-400.woff2") format("woff2");
+  font-weight:400;font-style:normal;font-display:swap}
+
+:root{
+  --gece:#1E1913;
+  --altin:#C6A35A;
+  --bronz:#B36A3C;
+  --kemik:#F5EFE3;
+  --kum:#E5D8C0;
+  --sessiz:#9A9285;
+}
+
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;padding:2.5rem 1.25rem 4rem;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;font-size:1.0625rem;line-height:1.75;color:#1f1c17;background:#faf8f4}
-main{max-width:42rem;margin:0 auto}
-h1{font-size:1.65rem;line-height:1.3;font-weight:600;margin:0 0 1.5rem;letter-spacing:.01em}
-h2{font-size:1.05rem;line-height:1.4;font-weight:600;margin:2.5rem 0 .75rem;letter-spacing:.06em;text-transform:none}
-p{margin:0 0 1.15rem}
-ul,ol{margin:0 0 1.15rem;padding-left:1.4rem}
-li{margin:0 0 .5rem}
-a{color:#7a5c1f}
-a:hover{color:#4d3a13}
-hr{border:0;border-top:1px solid #e2dccf;margin:2.5rem 0}
-footer{margin-top:3rem;font-size:.9375rem;color:#5c564c}
-footer a{color:#5c564c}
-@media (prefers-color-scheme:dark){
-body{color:#e8e3d8;background:#1a1713}
-a{color:#c6a35a}
-a:hover{color:#dcbe7e}
-hr{border-top-color:#332e26}
-footer,footer a{color:#9a9285}
+
+body{
+  margin:0;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(2rem,8vw,4rem) 1.25rem;
+  background:var(--gece);
+  color:var(--kemik);
+  font-family:"Jost",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:1.0625rem;
+  line-height:1.7;
+  text-align:center;
+  /* Nokta dokusu — öne çıkan görselden. Çok soluk; okumayı bozmaz. */
+  background-image:radial-gradient(rgba(198,163,90,.09) 1px,transparent 1px);
+  background-size:34px 34px;
+  background-position:center;
+}
+
+/* Enso'nun arkasındaki soluk halkalar — dekoratif, ekran okuyucudan gizli. */
+.halkalar{position:fixed;inset:0;pointer-events:none;display:grid;place-items:center;overflow:hidden}
+.halkalar span{
+  position:absolute;border-radius:50%;
+  border:1px solid rgba(198,163,90,.07);
+}
+.halkalar span:nth-child(1){width:min(78vw,540px);aspect-ratio:1}
+.halkalar span:nth-child(2){width:min(112vw,820px);aspect-ratio:1}
+
+main{position:relative;max-width:34rem;width:100%}
+
+/* ── Mühür ─────────────────────────────────────────────────────────────── */
+.muhur{position:relative;display:grid;place-items:center;margin:0 auto clamp(1.75rem,5vw,2.5rem)}
+.muhur img{
+  display:block;
+  width:clamp(104px,26vw,148px);height:auto;
+  position:relative;z-index:1;
+}
+/* Nefes — mührün KENDİSİ değil, arkasındaki parıltı nefes alır: marka
+   çizimi sabit kalır, hareket yalnız ışıkta olur. */
+.muhur::before{
+  content:"";position:absolute;
+  width:clamp(150px,38vw,215px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,rgba(198,163,90,.20) 0%,rgba(198,163,90,0) 68%);
+  animation:nd-breathe 7s ease-in-out infinite;
+}
+@keyframes nd-breathe{
+  0%,100%{opacity:.45;transform:scale(1)}
+  50%    {opacity:.90;transform:scale(1.06)}
+}
+
+/* ── Kelime markası ────────────────────────────────────────────────────── */
+/* ⚠️ TÜRKÇE İ TUZAĞI — `text-transform:uppercase` KULLANILMAZ. Sayfa
+   `lang="tr"` olduğu için tarayıcı "Nodia" → "NODİA" üretir (noktalı İ) ve
+   marka adı bozulur. Bu yüzden büyük harfler DOĞRUDAN yazılmıştır.
+   Aynı tuzak uygulamada da yaşandı (SEKME-IKON-1). */
+h1{
+  margin:0;
+  font-family:"Cinzel",Georgia,"Times New Roman",serif;
+  font-weight:500;
+  font-size:clamp(1.45rem,6.2vw,2.15rem);
+  line-height:1.25;
+  letter-spacing:.16em;
+  /* letter-spacing sondaki harften sonra da boşluk bırakır; optik ortalama
+     için o kadarını geri alıyoruz. */
+  text-indent:.16em;
+  color:var(--kemik);
+}
+h1 span{display:block}
+
+.slogan{
+  margin:clamp(.9rem,3vw,1.25rem) 0 0;
+  font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  font-style:italic;
+  font-size:clamp(1.15rem,4.6vw,1.5rem);
+  line-height:1.4;
+  color:var(--altin);
+}
+
+.durum{
+  margin:clamp(1.5rem,5vw,2rem) 0 0;
+  font-size:.9375rem;
+  letter-spacing:.12em;
+  color:var(--sessiz);
+}
+
+/* ── Ayraç ─────────────────────────────────────────────────────────────── */
+hr{
+  border:0;height:1px;width:clamp(48px,14vw,72px);
+  margin:clamp(2rem,6vw,2.75rem) auto;
+  background:linear-gradient(90deg,transparent,rgba(198,163,90,.45),transparent);
+}
+
+/* ── Bağlantılar ───────────────────────────────────────────────────────── */
+nav{font-size:.9375rem;line-height:2.1}
+nav a,footer a{
+  color:var(--kum);
+  text-decoration:none;
+  border-bottom:1px solid rgba(229,216,192,.22);
+  padding-bottom:1px;
+}
+nav a:hover,nav a:focus-visible,
+footer a:hover,footer a:focus-visible{
+  color:var(--altin);border-bottom-color:rgba(198,163,90,.7);
+}
+.ayrac{color:rgba(154,146,133,.55);padding:0 .45rem}
+
+footer{
+  margin-top:clamp(1.75rem,5vw,2.25rem);
+  font-size:.875rem;line-height:2.1;color:var(--sessiz);
+}
+footer a{color:var(--sessiz);border-bottom-color:rgba(154,146,133,.28)}
+
+/* Odak halkası — klavye kullanıcısı için görünür kalsın. */
+a:focus-visible{outline:2px solid var(--altin);outline-offset:3px;border-radius:2px}
+
+/* ── Hareketi azalt ────────────────────────────────────────────────────── */
+/* Parıltı kaybolmaz, yalnız DURUR — kompozisyon bozulmaz. (Uygulamadaki
+   K9 ekranının kuralıyla aynı.) */
+@media (prefers-reduced-motion:reduce){
+  .muhur::before{animation:none;opacity:.65}
+}
+
+/* Çok dar ekranda bağlantılar alt alta rahat nefes alsın. */
+@media (max-width:22rem){
+  .ayrac{display:block;height:0;overflow:hidden;padding:0}
 }
 </style>
 </head>
 <body>
+
+<div class="halkalar" aria-hidden="true"><span></span><span></span></div>
+
 <main>
-<h1>Nodia Collective</h1>
-<p>Niyetli bir topluluk. Yakında.</p>
-<ul>
-  <li><a href="gizlilik/">Gizlilik Politikası</a> · <a href="aydinlatma/">Aydınlatma Metni</a></li>
-  <li><a href="kullanim-sartlari/">Üyelik ve Kullanım Şartları</a></li>
-  <li><a href="hesap-silme/">Hesap Silme</a></li>
-</ul>
-<hr>
-<footer><a href="cocuk-guvenligi/">Çocuk Güvenliği Standartları</a> · <a href="mailto:info@nodiacollective.com">info@nodiacollective.com</a></footer>
+  <div class="muhur">
+    <img src="varliklar/nodia-enso-480.png" alt="Nodia Collective mührü — altın bir enso çemberi ve bronz nokta" width="480" height="480">
+  </div>
+
+  <h1><span>NODIA</span><span>COLLECTIVE</span></h1>
+
+  <p class="slogan">Kalabalık değil, çember.</p>
+
+  <p class="durum">Yakında.</p>
+
+  <hr>
+
+  <nav aria-label="Yasal metinler">
+    <a href="gizlilik/">Gizlilik Politikası</a><span class="ayrac">·</span><a href="aydinlatma/">Aydınlatma Metni</a><br>
+    <a href="kullanim-sartlari/">Üyelik ve Kullanım Şartları</a><span class="ayrac">·</span><a href="hesap-silme/">Hesap Silme</a>
+  </nav>
+
+  <footer>
+    <a href="cocuk-guvenligi/">Çocuk Güvenliği Standartları</a><br>
+    <a href="mailto:info@nodiacollective.com">info@nodiacollective.com</a>
+  </footer>
 </main>
+
 </body>
 </html>
