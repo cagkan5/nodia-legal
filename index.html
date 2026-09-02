@@ -8,8 +8,7 @@
 <meta name="theme-color" content="#1E1913">
 <link rel="icon" href="favicon.ico" sizes="any">
 
-<!-- Paylaşım kartı: Play mağaza öne çıkan görselinin ta kendisi (1024x500).
-     Ayrı bir kart TASARLANMADI — marka kompozisyonu zaten onaylı ve yayında. -->
+<!-- Paylaşım kartı: Play mağaza öne çıkan görselinin ta kendisi (1024x500). -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nodiacollective.com/">
 <meta property="og:title" content="Nodia Collective">
@@ -20,6 +19,7 @@
 
 <link rel="preload" as="font" type="font/woff2" href="varliklar/cinzel-500.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="varliklar/jost-400.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="varliklar/jost-600.woff2" crossorigin>
 
 <style>
 /* ════════════════════════════════════════════════════════════════════════
@@ -30,96 +30,101 @@
       kelimesi kelimesine bağlıdır — ikisine de bu dosyadan DOKUNULMAZ.
 
    ⛔ SAYFA HİÇBİR ŞEY ANLATMAZ. Bölüm yok, kaydırma yok, pazarlama metni
-      yok, SLOGAN YOK. Görünen metin marka adı, düğme ve üç bağlantıdan
-      ibarettir. Sayfanın tek işi bir insanın kapıyı çalmaya karar vermesi —
-      o yüzden kapıyı TARİF ETMEZ, kapının KENDİSİ olur.
+      yok, slogan yok. Görünen metin: marka adı, düğme ve dipteki şerit.
+      Sayfa kapıyı TARİF ETMEZ, kapının KENDİSİ olur.
 
    ⛔ ŞEHİR ADI GEÇMEZ. Nodia bir şehirle sınırlı değildir. (Hukuk
-      sayfalarındaki "Bursa" veri sorumlusunun POSTA ADRESİDİR, hizmet
-      bölgesi değil — o ayrı bir şeydir ve oraya dokunulmaz.)
+      sayfalarındaki "Bursa" veri sorumlusunun POSTA ADRESİDİR.)
 
    ⛔ WEB SİTESİNDEN BAŞVURU YOK. Düğme bir forma değil, uygulamanın MAĞAZA
-      adımına götürür.
+      adımına götürür. "İletişim" de bir sayfaya değil, doğrudan `mailto:`ye.
 
    ⭑ ZEMİN DEĞERLERİ UYDURULMADI — `brand/store/kaynak/B2-feature-graphic.svg`
       dosyasından, yani Play'de YAYINDA olan öne çıkan görselin kaynağından
       okundu: nokta dokusu BRONZ `#B36A3C` (altın değil), 26 px ızgara;
-      halkalar ÜÇ tane, yarıçap oranı 200:300:400 ve opaklık .18/.11/.07,
-      altın `#C6A35A`, 1.5 px; kelime markası İKİ EŞİT satır, `#E7D4A6`,
-      Cinzel, ~.3em aralık.
-      ⛔ Opaklıklar bu ortama uyarlandı (1024×500 banner ile tam ekran sayfa
-         aynı şey değil); RENKLER, ORANLAR ve YAPI birebir kaynaktandır.
-      ⛔ ELENEN İKİ FİKİR: (a) "mühür kendi kendini çizsin" — enso'nun temiz
-         vektörü YOK, feature graphic'te bile `<image>`; yapmak logoyu
-         yeniden çizmek olurdu. (b) "NODIA büyük / COLLECTIVE küçük yazıt" —
-         kaynak iki EŞİT satır gösteriyor, farklısı logo varyantı uydurmaktı.
+      halkalar ÜÇ tane, yarıçap oranı 200:300:400, altın `#C6A35A`, 1.5 px;
+      kelime markası İKİ EŞİT satır, `#E7D4A6`.
 
-   ⭑ İMZA ÖĞESİ — ÜÇ YÖRÜNGE, YİRMİ YEDİ NOKTA. Her halkanın kendi noktaları
-      var ve her biri KENDİ hızında döner (16 / 22 / 34 sn) ⇒ halkalar
-      birbirine göre yavaşça kayar, hiçbir an tekrarlanmaz. Ortadaki 22 sn
-      uygulamanın K9 ekranının değeridir.
+   ⭑ İMZA ÖĞESİ — 3B YÖRÜNGE SİSTEMİ, MÜHRÜN ÇEVRESİNDE.
+      ⛔ SİSTEM MÜHRE BAĞLIDIR, pencereye değil (`.zemin`, `.muhur`in
+         merkezinde sıfır boyutlu bir çıpadır). Pencereye bağlıyken mühür
+         kompozisyonun ÜSTÜNDE kaldığı için yörüngelerin merkezinde
+         DURMUYORDU — Çağkan gördü, düzeltildi.
+      ⭑ İKİ AYRI DÖNÜŞ, ve ikisi de gerekli:
+        (1) `nd-donus` — noktalar yörünge üzerinde yürür (16/22/34 sn).
+        (2) `nd-savrulma` — DÜZLEMİN KENDİSİ savrulur (78/104/140 sn, ortadaki
+            ters yönde). ⛔ Bu olmadan elips SABİT görünür: `rotateY` bir
+            çemberi kendi üstüne eşler, yani yörünge çizgisi hiç kıpırdamaz,
+            yalnız noktalar yürür. İlk 3B denemesinde tam bu oldu.
       ⭑ Adet yarıçapla ORANTILI (6 / 9 / 12) ⇒ noktalar arası YAY aralığı üç
-        halkada da aynı; sayı keyfi değil, geometriden geliyor.
-      ⭑ Noktalar büyüyüp küçülür; her birinin süresi ve faz gecikmesi ayrı
-        (altın oran adımıyla dağıtıldı) ⇒ hiçbir ikisi aynı anda nabız atmaz.
-      ⭑ Dış halkanın noktaları daha küçük ve soluk — derinlik.
-      ⛔ Nokta markanın KENDİ doku öğesidir (kaynaktaki bronz nokta ızgarası);
-         yeni bir biçim icat edilmedi, var olan öğe yörüngeye dizildi.
+        yörüngede de aynı; sayı keyfi değil, geometriden.
+      ⭑ ÜÇ DERİNLİK İPUCU: perspektif (öne gelen BÜYÜR), `nd-derinlik`
+        (arkadaki SÖNER — faz kayması `--f` her noktanın kendi açısından
+        türetildi), ve yatık yörünge çizgisinin elips görünmesi.
+      ⛔ NOKTALAR KAMERAYA DÖNÜK TUTULUR (`nd-karsi`); serbest bırakılsalar
+         yatık düzlemde ince elipslere EZİLİRLERDİ. Karşı-dönüş yörüngenin
+         dönüşüyle AYNI sürededir ve ikisi de gecikmesiz başlar ⇒ faz kilidi
+         kendiliğinden korunur.
+      ⛔ Karşı-dönüş savrulmayı TELAFİ ETMEZ ve etmesine GEREK YOK: artakalan
+         fark saf bir Z ekseni dönüşüdür, YUVARLAK bir noktada görünmez.
       ⛔ ELENDİ: "kenarı bronz yaya boyanmış halka + tek nokta" — yavaş olsa
          da SPINNER görsel diline oturuyordu. Klişe hızda değil BİÇİMDE olur.
 
    ⭑ HAREKET SAF CSS — kütüphane yok. Önceden belirli hareket ana iş
-      parçacığının dışında koşar; JS tabanlı animasyon sayfa yüklenirken kare
-      düşürür. Ölçülen bedel de gereksizdi (Motion mini 5 KB / tam 46 KB).
-      ⛔ Yalnız `transform` ve `opacity` animasyonlanır.
-      ⛔ Dönüş ile nabız AYRI ÖĞELERDE: `<i>` konumu taşır (durağan
-         `rotate+translate`), `<b>` nabzı (`scale`). Tek öğede birleştirilse
-         her nabız karesinde açı da yeniden hesaplanırdı.
+      parçacığının dışında koşar. ⛔ Yalnız `transform`, `scale`, `opacity`.
+      ⛔ Bir noktanın ÜÇ animasyonu ÜÇ AYRI ÖZELLİKTEDİR (karşı-dönüş →
+         `transform`, nabız → `scale`, derinlik → `opacity`); tek özelliğe
+         yığılsalar birbirlerini ezerlerdi. Aynı sebeple savrulma ve dönüş
+         AYRI KATMANLARDA (`.yorunge` / `.donus`).
 
-   ⭑ FONTLAR KENDİ SUNUCUMUZDA (varliklar/*.woff2), CDN'DEN DEĞİL. Google
-      Fonts kullanmak her ziyaretçinin IP'sini üçüncü tarafa gönderirdi ve
-      yayınlanmış Gizlilik Politikası web sitesi için böyle bir aktarım
-      BEYAN ETMİYOR — sayfa ile metni çelişirdi. Lisans:
-      varliklar/FONT-LISANSLARI.txt (SIL OFL 1.1).
-      ⛔ Cormorant ARTIK YÜKLENMİYOR — tek kullanıcısı slogandı, o da silindi.
-         Dosya `varliklar/` içinde DURUYOR (hukuk sayfaları kullanıyor).
+   ⭑ FONTLAR KENDİ SUNUCUMUZDA, CDN'DEN DEĞİL — Google Fonts her ziyaretçinin
+      IP'sini üçüncü tarafa gönderirdi ve Gizlilik Politikası web sitesi için
+      böyle bir aktarım BEYAN ETMİYOR. Lisans: varliklar/FONT-LISANSLARI.txt.
+      ⭑ DÜĞME JOST 600 — kelime markasından AYRI bir ses (ad tören, düğme
+        iş). Gerçek 600 yüzü bu iş için üretildi: değişken Jost'tan 600'de
+        sabitlenip yalnız Türkçe BÜYÜK harf kümesine altkümelendi (31 glif,
+        2.168 bayt). ⛔ Sentetik kalın YASAK — düğme bir ara Cinzel'di, ondan
+        önce de Jost 400 yüzüyle `font-weight:500` istiyordu ve tarayıcı
+        sahte kalın üretiyordu. [ÖLÇÜM: subset'ler Ş/ş/İ dahil gereken tüm
+        glifleri taşıyor.]
 
-   ⭑ ALT ŞERİT ÜÇ ÖĞEYE İNDİ (Çağkan, 2 Eyl: "sade olsun, Raya gibi").
-      Kaldırılan üç bağlantının erişilebilirliği ÖLÇÜLDÜ, körü körüne
-      silinmedi: `cocuk-guvenligi` BEŞ hukuk sayfasından, `aydinlatma` yine
-      beşinden, `hesap-silme` ise `aydinlatma`'dan linkli ⇒ üçü de ayakta
-      ve zincirle erişilebilir kalıyor. Sayfaların KENDİLERİ silinmedi.
+   ⭑ TEK ŞERİT, SAYFANIN DİBİNDE — üst nav YOK (Çağkan: "iletişim de aşağıda
+      olsun"; sayfa tek ekran, aşağı yukarı inmek yok). Dört öğe: İletişim ·
+      Kullanım Şartları · Gizlilik Politikası · telif.
+      Kaldırılan bağlantıların erişilebilirliği ÖLÇÜLDÜ:
+      `cocuk-guvenligi` BEŞ hukuk sayfasından, `aydinlatma` yine beşinden,
+      `hesap-silme` ise `aydinlatma`'dan linkli ⇒ üçü de ayakta. Sayfalar
+      SİLİNMEDİ.
 
-   ⭑ DAİMA KOYU — bilinçli. Uygulamanın varsayılan teması 25 Ağu'da `system`
-      yerine `dark`'a çekildi; gerekçe aynen burada da geçerli: Gece lansman
-      rengidir ve markanın ilk izlenimi ziyaretçinin telefon ayarına
-      DEVREDİLMEZ. (Hukuk sayfaları belge yüzeyidir; onlar iki temayı da
-      destekler.)
+   ⭑ DAİMA KOYU — markanın ilk izlenimi ziyaretçinin telefon ayarına
+      devredilmez. (Hukuk sayfaları iki temayı da destekler.)
    ════════════════════════════════════════════════════════════════════════ */
 
 @font-face{font-family:"Cinzel";src:url("varliklar/cinzel-500.woff2") format("woff2");
   font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:"Jost";src:url("varliklar/jost-400.woff2") format("woff2");
   font-weight:400;font-style:normal;font-display:swap}
+/* ⭑ GERÇEK 600 — düğme için. Değişken Jost'tan 600'de sabitlenip yalnız
+   Türkçe BÜYÜK harf kümesine altkümelendi: 31 glif, 2.168 bayt.
+   ⛔ Sentetik kalın kullanılmaz: yüklü tek yüz 400 iken `font-weight:600`
+      istemek tarayıcıya sahte kalın ürettirir — düğmenin önceki hâlinde
+      tam bu oluyordu. */
+@font-face{font-family:"Jost";src:url("varliklar/jost-600.woff2") format("woff2");
+  font-weight:600;font-style:normal;font-display:swap}
 
 :root{
   --gece:#1E1913;
   --altin:#C6A35A;
-  --altin-acik:#E7D4A6; /* kaynaktaki kelime markası rengi */
+  --altin-acik:#E7D4A6;
   --bronz:#B36A3C;
   --kum:#E5D8C0;
   --sessiz:#9A9285;
 
-  /* Eğriler — tarayıcının zayıf yerleşiklerinden DEĞİL, adı olan
-     eğrilerden. `--cikis` güçlü ease-out (giriş); `--nefes` easeInOutSine,
-     uzun ambiyans döngüleri için doğru olan (arayüz için kalibre edilmiş
-     sert ease-in-out burada mekanik durur). */
-  --cikis:cubic-bezier(0.23,1,0.32,1);
-  --nefes:cubic-bezier(0.37,0,0.63,1);
+  --cikis:cubic-bezier(0.23,1,0.32,1);   /* güçlü ease-out (giriş) */
+  --nefes:cubic-bezier(0.37,0,0.63,1);   /* easeInOutSine (ambiyans) */
 
-  /* Orta halkanın yarıçapı. Diğer ikisi kaynaktaki 200:300:400 oranından
-     türetilir ⇒ ×2/3 ve ×4/3. */
-  --r:min(43vw,296px);
+  /* Orta yörüngenin yarıçapı; diğer ikisi 200:300:400 oranından. */
+  --r:min(40vw,272px);
 }
 
 *{box-sizing:border-box}
@@ -130,6 +135,10 @@ body{
   position:relative;
   min-height:100svh;
   display:flex;
+  /* Sütun yönü: iki şerit normalde akış DIŞINDA ⇒ akışta yalnız `main` var
+     ve tam ortalanır. Kısa pencerede ikisi de akışa döner ve alt alta
+     dizilir — satır yönünde olsalardı `main`in YANINA geçerlerdi. */
+  flex-direction:column;
   align-items:center;
   justify-content:center;
   padding:clamp(2rem,8vw,4rem) 1.25rem;
@@ -140,10 +149,8 @@ body{
   line-height:1.7;
   text-align:center;
   overflow-x:hidden;
-  /* Kaynaktaki iki zemin katmanı: sıcak radyal ışık + BRONZ nokta ızgarası
-     (26 px). */
   background-image:
-    radial-gradient(circle at 50% 46%,
+    radial-gradient(circle at 50% 44%,
       rgba(198,163,90,.13) 0%,
       rgba(179,106,60,.06) 38%,
       rgba(30,25,19,0) 72%),
@@ -152,54 +159,95 @@ body{
   background-position:center,center;
 }
 
-/* ── Zemin: üç halka + üç yörünge ──────────────────────────────────────── */
-/* ⚠️ `grid-template:100%/100%` ŞART. Onsuz ızgara satırı EN BÜYÜK çocuğa
-   göre büyür ve ortalama o satırın içinde yapılır ⇒ bütün çember sistemi
-   pencere merkezinden kayar (ölçüldü: 720px yükseklikte 35px aşağıda) ve
-   kayma miktarı pencere boyuna göre değişir. */
-.zemin{position:fixed;inset:0;pointer-events:none;display:grid;grid-template:100%/100%;place-items:center;overflow:hidden}
-.zemin > *{grid-area:1/1;border-radius:50%;aspect-ratio:1}
-
-/* ⚠️ `border-color`u BURADA verme — `.zemin span` (0,1,1) aşağıdaki tek
-   sınıf seçicilerinden (0,1,0) daha özgül olduğu için rengi ezer ve üç
-   halka da GÖRÜNMEZ olur. Bir kez oldu, ölçümle yakalandı. */
-.zemin span{border-style:solid;border-width:1.5px}
-.iz-ic  {width:calc(var(--r) * 4/3);border-color:rgba(198,163,90,.18)}
-.iz-orta{width:calc(var(--r) * 2);  border-color:rgba(198,163,90,.11)}
-.iz-dis {width:calc(var(--r) * 8/3);border-color:rgba(198,163,90,.07)}
-
-/* Yörüngeler: her biri kendi hızında. Tek animasyonlu öğe KAPSAYICIDIR;
-   noktalar durağan `transform`la yerleşir ve dönüşü ondan miras alır. */
-.yorunge{position:relative;animation:nd-donus linear infinite}
-.yr-ic  {--rr:calc(var(--r) * 2/3);width:calc(var(--r) * 4/3);animation-duration:16s}
-.yr-orta{--rr:var(--r);            width:calc(var(--r) * 2);  animation-duration:22s}
-.yr-dis {--rr:calc(var(--r) * 4/3);width:calc(var(--r) * 8/3);animation-duration:34s}
-@keyframes nd-donus{ to{transform:rotate(360deg)} }
-
-/* `<i>` yalnız KONUM taşır (boyutsuz nokta), `<b>` görünen daireyi ve
-   NABZI taşır. Böylece iki hareket birbirinin hesabını bozmaz. */
-.yorunge i{
-  position:absolute;top:50%;left:50%;width:0;height:0;
-  transform:rotate(var(--a)) translateY(calc(var(--rr) * -1));
+/* ── 3B yörünge sistemi ────────────────────────────────────────────────── */
+/* ⛔ Sıfır boyutlu çıpa, `.muhur`in TAM MERKEZİNDE ⇒ mühür yörüngelerin
+   ortasında durur. Boyutsuz olduğu için yerleşimi hiç etkilemez. */
+.zemin{
+  position:absolute;top:50%;left:50%;
+  width:0;height:0;
+  pointer-events:none;
+  perspective:1050px;
 }
-.yorunge b{
+/* Dış katman: düzlemin SAVRULMASI (yörüngenin kendisi döner). */
+.yorunge{
+  position:absolute;top:0;left:0;
+  width:var(--w);aspect-ratio:1;
+  margin:calc(var(--w) / -2) 0 0 calc(var(--w) / -2);
+  transform-style:preserve-3d;
+  animation:nd-savrulma var(--sv) linear infinite;
+}
+.yr-ic  {--rr:calc(var(--r) * 2/3);--w:calc(var(--r) * 4/3);--egim:36deg;--z:-12deg;--sp:16s;--sv:78s; --iz:rgba(198,163,90,.20)}
+.yr-orta{--rr:var(--r);            --w:calc(var(--r) * 2);  --egim:27deg;--z:7deg;  --sp:22s;--sv:104s;--iz:rgba(198,163,90,.13)}
+.yr-dis {--rr:calc(var(--r) * 4/3);--w:calc(var(--r) * 8/3);--egim:44deg;--z:-3deg; --sp:34s;--sv:140s;--iz:rgba(198,163,90,.08)}
+/* Orta yörünge ters savrulur — sistem tek yöne akan bir çark gibi durmasın. */
+.yr-orta{animation-direction:reverse}
+
+@keyframes nd-savrulma{
+  from{transform:rotateZ(var(--z))}
+  to  {transform:rotateZ(calc(var(--z) + 360deg))}
+}
+
+/* İç katman: noktaların yörünge üzerinde YÜRÜMESİ. */
+.donus{
+  position:absolute;inset:0;
+  transform-style:preserve-3d;
+  animation:nd-donus var(--sp) linear infinite;
+}
+@keyframes nd-donus{
+  from{transform:rotateX(var(--egim)) rotateY(0deg)}
+  to  {transform:rotateX(var(--egim)) rotateY(360deg)}
+}
+
+/* Yörünge çizgisi: `rotateX(90deg)` ile noktaların düzlemine YATIRILIR. */
+.iz{
+  position:absolute;inset:0;border-radius:50%;
+  border:1.5px solid var(--iz);
+  transform:rotateX(90deg);
+}
+
+/* `<i>` yalnız 3B KONUM taşır (boyutsuz), `<b>` görünen daireyi taşır. */
+.donus i{
+  position:absolute;top:50%;left:50%;width:0;height:0;
+  transform-style:preserve-3d;
+  transform:rotateY(var(--a)) translateZ(var(--rr));
+}
+.donus b{
   position:absolute;top:0;left:0;
   width:var(--b);height:var(--b);
   margin:calc(var(--b) / -2) 0 0 calc(var(--b) / -2);
   border-radius:50%;
   background:var(--bronz);
   opacity:var(--o);
-  animation:nd-nabiz var(--s) var(--nefes) var(--d) infinite;
+  /* Işıma noktanın kendi boyuna oranlı ⇒ perspektif noktayı büyütünce
+     halesi de büyür. Durağan; kare başına boyama maliyeti yok. */
+  box-shadow:0 0 calc(var(--b) * 1.5) calc(var(--b) * .12) rgba(179,106,60,.55);
+  animation:
+    nd-karsi     var(--sp) linear       infinite,
+    nd-nabiz     var(--s)  var(--nefes) var(--d) infinite,
+    nd-derinlik  var(--sp) var(--nefes) calc(var(--sp) * var(--f) * -1) infinite;
+}
+/* Ebeveynin dönüşünün TERSİ ⇒ nokta hep kameraya bakar, ezilmez.
+   ⛔ Savrulma terimi YOK ve gerekmiyor: artakalan fark saf Z dönüşüdür,
+      yuvarlak bir noktada görünmez. */
+@keyframes nd-karsi{
+  from{transform:rotateY(calc(var(--a) * -1))          rotateX(calc(var(--egim) * -1))}
+  to  {transform:rotateY(calc(var(--a) * -1 - 360deg)) rotateX(calc(var(--egim) * -1))}
 }
 /* `scale(0)` YOK — hiçbir şey yoktan belirmez. */
 @keyframes nd-nabiz{
-  0%,100%{transform:scale(.72)}
-  50%    {transform:scale(1.18)}
+  0%,100%{scale:.78}
+  50%    {scale:1.22}
 }
-/* En içteki halkanın en parlak noktası hafifçe ışır — derinlik, "baş" değil. */
-.yr-ic i:nth-child(2) b{box-shadow:0 0 10px 1px rgba(179,106,60,.45)}
+/* Arkadaki nokta söner; öndeki tam parlaklıkta. */
+@keyframes nd-derinlik{
+  0%,100%{opacity:var(--o)}
+  50%    {opacity:calc(var(--o) * .18)}
+}
 
-main{position:relative;max-width:34rem;width:100%}
+/* ⭑ Kompozisyon pencerenin ORTASINDAN YUKARI çekilir (Çağkan: "daha
+   yukarıdan başlayabilir"). Sütun yönünde ortalanan tek akış öğesine alt
+   boşluk vermek, öğeyi o boşluğun YARISI kadar yukarı taşır. */
+main{position:relative;max-width:34rem;width:100%;margin-bottom:clamp(5rem,17vh,12rem)}
 
 /* ── Mühür ─────────────────────────────────────────────────────────────── */
 .muhur{
@@ -212,13 +260,14 @@ main{position:relative;max-width:34rem;width:100%}
   width:clamp(108px,27vw,152px);height:auto;
   position:relative;z-index:1;
 }
-/* Nefes — mührün KENDİSİ değil, arkasındaki parıltı nefes alır: marka
-   çizimi sabit kalır, hareket yalnız ışıkta olur. (K9'un değerleri.) */
+/* Nefes — mührün KENDİSİ değil, arkasındaki parıltı nefes alır. (K9'un
+   değerleri: opaklık .45↔.9 · ölçek 1↔1.06 · 7 sn.) */
 .muhur::before{
   content:"";position:absolute;
   width:clamp(154px,39vw,220px);aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle,rgba(198,163,90,.20) 0%,rgba(198,163,90,0) 68%);
+  background:radial-gradient(circle,rgba(198,163,90,.22) 0%,rgba(198,163,90,0) 68%);
   animation:nd-nefes 7s var(--nefes) infinite;
+  z-index:1;
 }
 @keyframes nd-nefes{
   0%,100%{opacity:.45;transform:scale(1)}
@@ -227,8 +276,8 @@ main{position:relative;max-width:34rem;width:100%}
 
 /* ── Kelime markası ────────────────────────────────────────────────────── */
 /* ⚠️ TÜRKÇE İ TUZAĞI — `text-transform:uppercase` KULLANILMAZ. Sayfa
-   `lang="tr"` olduğu için tarayıcı "Nodia" → "NODİA" üretir (noktalı İ) ve
-   marka adı bozulur. Bu yüzden büyük harfler DOĞRUDAN yazılmıştır.
+   `lang="tr"` olduğu için tarayıcı "Nodia" → "NODİA" üretir (noktalı İ).
+   Büyük harfler DOĞRUDAN yazılmıştır — düğmedeki "BAŞVUR" da öyle.
    ⛔ İki satır EŞİT puntoda — kaynaktaki kelime markası böyledir. */
 h1{
   margin:0;
@@ -239,22 +288,29 @@ h1{
   letter-spacing:.3em;
   text-indent:.3em; /* sondaki harf boşluğunu geri al — optik ortalama */
   color:var(--altin-acik);
+  position:relative;z-index:1;
 }
 h1 span{display:block}
 
 /* ── Çağrı düğmesi ─────────────────────────────────────────────────────── */
 /* Varsayılan hal CANLI: altın gradyan + Gece mürekkep, doğrudan Play'e.
-   Gradyan uygulamanın birincil düğmesinin aynısı; `onAccent` = Gece kilitli
-   kararı burada da geçerli (ölçülen en kötü kontrast 7.30).
-   Script YALNIZCA iPhone/iPad istisnasını işler (aşağıya bakın). */
+   `onAccent` = Gece kilitli kararı burada da geçerli (en kötü kontrast 7.30).
+   Script YALNIZCA iPhone/iPad istisnasını işler. */
 .cta{
   display:inline-block;
+  position:relative;z-index:1;
   margin:clamp(2.4rem,7vw,3.1rem) 0 0;
-  padding:1rem 3.1rem;
+  padding:1.05rem 3rem;
   border-radius:999px;
-  font-size:.9375rem;
-  font-weight:500;
-  letter-spacing:.12em;
+  /* ⭑ Tip kararı: kelime markası TÖRENSEL serif (Cinzel), eylem ise DÜZ ve
+     KARARLI bir geometrik sans (Jost 600). İkisi bilinçli olarak ayrı
+     seslerdir — ad tören, düğme iş. Aynı yüz olsaydı düğme markanın bir
+     parçası gibi okunur, bir EYLEM gibi değil. */
+  font-family:"Jost",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-weight:600;
+  font-size:clamp(.84rem,3.2vw,.98rem);
+  letter-spacing:.17em;
+  text-indent:.17em;
   text-decoration:none;
   border:1px solid transparent;
   color:var(--gece);
@@ -271,14 +327,15 @@ h1 span{display:block}
   color:var(--sessiz);
   background-image:none;
   border-color:rgba(198,163,90,.28);
-  font-weight:400;
   cursor:default;
 }
 
 /* ── Alt şerit ─────────────────────────────────────────────────────────── */
-/* Üç öğe, ayraç YOK, geniş aralık — Raya'nın ritmi. Sayfanın dibine
-   sabitlenir ki kompozisyon pencerenin tam ortasında kalsın (zemin
-   halkaları da orada merkezli). */
+/* TEK şerit, sayfanın dibinde: iletişim + iki hukuk bağlantısı + telif.
+   Ayraç YOK, geniş aralık. Akış DIŞINDA ⇒ kompozisyonun yerini etkilemez.
+   ⛔ Üst nav KALDIRILDI (Çağkan, 2 Eyl): "iletişim de aşağıda olsun".
+      Sayfa tek ekran, aşağı yukarı inmek yok — bir üst şeride gerek yok.
+   ⛔ "İletişim" bir sayfaya değil, DOĞRUDAN e-postaya gider (`mailto:`). */
 footer{
   position:absolute;
   left:0;right:0;
@@ -287,17 +344,14 @@ footer{
   font-size:.8125rem;
   letter-spacing:.04em;
   color:var(--sessiz);
+  z-index:2;
 }
 footer ul{
   list-style:none;margin:0;padding:0;
   display:flex;flex-wrap:wrap;justify-content:center;
   gap:.6rem clamp(1.5rem,7vw,4.5rem);
 }
-footer a{
-  color:var(--sessiz);
-  text-decoration:none;
-  transition:color 180ms ease;
-}
+footer a{color:var(--sessiz);text-decoration:none;transition:color 180ms ease}
 @media (hover:hover) and (pointer:fine){
   footer a:hover{color:var(--altin)}
 }
@@ -307,40 +361,41 @@ footer a:focus-visible{color:var(--altin)}
 a:focus-visible{outline:2px solid var(--altin);outline-offset:3px;border-radius:2px}
 .cta:focus-visible{border-radius:999px;outline-offset:4px}
 
-/* Kısa pencerede (yatay telefon) şerit akışa döner ki kompozisyonla
-   çakışmasın. */
+/* Kısa pencerede (yatay telefon) iki şerit de akışa döner; sütun yönü
+   sayesinde üst-orta-alt sırasıyla dizilirler. */
 @media (max-height:640px){
   footer{position:static;margin-top:clamp(2rem,6vw,3rem)}
 }
 
 /* ── Açılış sekansı ────────────────────────────────────────────────────── */
-/* Dağınık efekt yerine TEK orkestre edilmiş an: öğeler 70 ms arayla,
-   8 piksel yükselerek gelir. `both` dolgusu sayesinde gecikme boyunca
-   görünmezler; CSS hiç yüklenmezse kural da yok demektir ⇒ içerik yine
-   görünür. */
+/* TEK orkestre edilmiş an: öğeler 70 ms arayla, 8 piksel yükselerek gelir.
+   `both` dolgusu gecikme boyunca gizler; CSS hiç yüklenmezse kural da yok
+   demektir ⇒ içerik yine görünür. */
 .acil{animation:nd-yukselis 700ms var(--cikis) both}
-.muhur {animation-delay:0ms}
-h1     {animation-delay:70ms}
-.cta   {animation-delay:140ms}
-footer {animation-delay:210ms}
+.muhur  {animation-delay:0ms}
+h1      {animation-delay:70ms}
+.cta    {animation-delay:140ms}
+footer  {animation-delay:210ms}
 @keyframes nd-yukselis{
   from{opacity:0;transform:translateY(8px)}
   to  {opacity:1;transform:none}
 }
 
 /* ── Hareketi azalt ────────────────────────────────────────────────────── */
-/* "Daha az ve daha yumuşak", SIFIR değil: konum/ölçek değişimlerinin hepsi
-   kalkar, nefes yalnız OPAKLIK olarak sürer, üç yörünge de durur ama DOM'da
-   ve ekranda KALIR — kompozisyon bozulmaz. Açılış sekansı iptal edilir;
-   `animation:none` dolguyu da kaldırdığı için öğeler doğal (görünür)
-   hallerinde durur. */
+/* "Daha az ve daha yumuşak", SIFIR değil: bütün döngüler durur ama sistem
+   EKRANDA KALIR — yörüngeler yatık hallerinde donar, noktalar kameraya
+   dönük ve görünür kalır, nefes yalnız OPAKLIK olarak sürer. */
 @media (prefers-reduced-motion:reduce){
-  .yorunge{animation:none}
-  .yorunge b{animation:none}
+  .yorunge{animation:none;transform:rotateZ(var(--z))}
+  .donus  {animation:none;transform:rotateX(var(--egim))}
+  .donus b{
+    animation:none;
+    transform:rotateY(calc(var(--a) * -1)) rotateX(calc(var(--egim) * -1));
+    opacity:var(--o);
+  }
   .acil{animation:none}
   .muhur::before{animation:nd-nefes-sakin 9s var(--nefes) infinite;transform:none}
-  .cta{transition:none}
-  footer a{transition:none}
+  .cta,footer a{transition:none}
 }
 @keyframes nd-nefes-sakin{
   0%,100%{opacity:.5}
@@ -350,52 +405,49 @@ footer {animation-delay:210ms}
 </head>
 <body>
 
-<div class="zemin" aria-hidden="true">
-  <span class="iz-ic"></span>
-  <span class="iz-orta"></span>
-  <span class="iz-dis"></span>
-
-  <!-- iç: 6 nokta (orta halkanın 3 eksiği) -->
-  <div class="yorunge yr-ic">
-    <i style="--a:0deg;--b:5px;--o:0.67;--s:6.8s;--d:-0s"><b></b></i><i style="--a:60deg;--b:6.9px;--o:0.92;--s:5.8s;--d:-3.6s"><b></b></i><i style="--a:120deg;--b:5.7px;--o:0.76;--s:7.5s;--d:-1.8s"><b></b></i>
-    <i style="--a:180deg;--b:7.6px;--o:0.61;--s:6.4s;--d:-5.5s"><b></b></i><i style="--a:240deg;--b:6.4px;--o:0.86;--s:5.4s;--d:-2.5s"><b></b></i><i style="--a:300deg;--b:5.3px;--o:0.7;--s:7.1s;--d:-0.6s"><b></b></i>
-  </div>
-
-  <!-- orta: 9 nokta -->
-  <div class="yorunge yr-orta">
-    <i style="--a:0deg;--b:4px;--o:0.58;--s:7.4s;--d:-0s"><b></b></i><i style="--a:40deg;--b:6.5px;--o:0.89;--s:6.2s;--d:-3.8s"><b></b></i><i style="--a:80deg;--b:4.9px;--o:0.7;--s:8.1s;--d:-1.9s"><b></b></i>
-    <i style="--a:120deg;--b:7.4px;--o:0.51;--s:7s;--d:-6s"><b></b></i><i style="--a:160deg;--b:5.9px;--o:0.82;--s:5.8s;--d:-2.7s"><b></b></i><i style="--a:200deg;--b:4.4px;--o:0.63;--s:7.7s;--d:-0.7s"><b></b></i>
-    <i style="--a:240deg;--b:6.8px;--o:0.44;--s:6.5s;--d:-4.6s"><b></b></i><i style="--a:280deg;--b:5.3px;--o:0.75;--s:5.4s;--d:-1.8s"><b></b></i><i style="--a:320deg;--b:7.8px;--o:0.56;--s:7.2s;--d:-6.8s"><b></b></i>
-  </div>
-
-  <!-- dış: 12 nokta, daha küçük ve soluk (derinlik) -->
-  <div class="yorunge yr-dis">
-    <i style="--a:0deg;--b:3px;--o:0.34;--s:8.5s;--d:-0s"><b></b></i><i style="--a:30deg;--b:4.2px;--o:0.52;--s:7.2s;--d:-4.4s"><b></b></i><i style="--a:60deg;--b:3.5px;--o:0.41;--s:9.3s;--d:-2.2s"><b></b></i>
-    <i style="--a:90deg;--b:4.7px;--o:0.3;--s:8s;--d:-6.8s"><b></b></i><i style="--a:120deg;--b:3.9px;--o:0.48;--s:6.7s;--d:-3.2s"><b></b></i><i style="--a:150deg;--b:3.2px;--o:0.37;--s:8.8s;--d:-0.8s"><b></b></i>
-    <i style="--a:180deg;--b:4.4px;--o:0.26;--s:7.5s;--d:-5.3s"><b></b></i><i style="--a:210deg;--b:3.7px;--o:0.43;--s:6.2s;--d:-2s"><b></b></i><i style="--a:240deg;--b:4.9px;--o:0.33;--s:8.3s;--d:-7.8s"><b></b></i>
-    <i style="--a:270deg;--b:4.1px;--o:0.5;--s:7s;--d:-3.9s"><b></b></i><i style="--a:300deg;--b:3.4px;--o:0.39;--s:9.1s;--d:-1.6s"><b></b></i><i style="--a:330deg;--b:4.6px;--o:0.29;--s:7.8s;--d:-6.2s"><b></b></i>
-  </div>
-</div>
-
 <main>
   <div class="muhur acil">
+
+    <div class="zemin" aria-hidden="true">
+      <div class="yorunge yr-ic"><div class="donus"><span class="iz"></span>
+      <!-- ic: 6 nokta (ortanin 3 eksigi) -->
+      <i style="--a:0deg;--b:7px;--o:0.86;--s:6.8s;--d:-0s;--f:1"><b></b></i><i style="--a:60deg;--b:9.5px;--o:1;--s:5.8s;--d:-3.6s;--f:0.8333"><b></b></i><i style="--a:120deg;--b:7.9px;--o:0.91;--s:7.5s;--d:-1.8s;--f:0.6667"><b></b></i>
+      <i style="--a:180deg;--b:10.4px;--o:0.83;--s:6.4s;--d:-5.5s;--f:0.5"><b></b></i><i style="--a:240deg;--b:8.9px;--o:0.97;--s:5.4s;--d:-2.5s;--f:0.3333"><b></b></i><i style="--a:300deg;--b:7.4px;--o:0.88;--s:7.1s;--d:-0.6s;--f:0.1667"><b></b></i>
+      </div></div>
+
+      <div class="yorunge yr-orta"><div class="donus"><span class="iz"></span>
+      <!-- orta: 9 nokta -->
+      <i style="--a:0deg;--b:6px;--o:0.79;--s:7.4s;--d:-0s;--f:1"><b></b></i><i style="--a:40deg;--b:8.8px;--o:1;--s:6.2s;--d:-3.8s;--f:0.8889"><b></b></i><i style="--a:80deg;--b:7.1px;--o:0.87;--s:8.1s;--d:-1.9s;--f:0.7778"><b></b></i>
+      <i style="--a:120deg;--b:9.8px;--o:0.74;--s:7s;--d:-6s;--f:0.6667"><b></b></i><i style="--a:160deg;--b:8.1px;--o:0.95;--s:5.8s;--d:-2.7s;--f:0.5556"><b></b></i><i style="--a:200deg;--b:6.4px;--o:0.82;--s:7.7s;--d:-0.7s;--f:0.4444"><b></b></i>
+      <i style="--a:240deg;--b:9.2px;--o:0.69;--s:6.5s;--d:-4.6s;--f:0.3333"><b></b></i><i style="--a:280deg;--b:7.5px;--o:0.9;--s:5.4s;--d:-1.8s;--f:0.2222"><b></b></i><i style="--a:320deg;--b:10.2px;--o:0.77;--s:7.2s;--d:-6.8s;--f:0.1111"><b></b></i>
+      </div></div>
+
+      <div class="yorunge yr-dis"><div class="donus"><span class="iz"></span>
+      <!-- dis: 12 nokta -->
+      <i style="--a:0deg;--b:5px;--o:0.63;--s:8.5s;--d:-0s;--f:1"><b></b></i><i style="--a:30deg;--b:6.9px;--o:0.85;--s:7.2s;--d:-4.4s;--f:0.9167"><b></b></i><i style="--a:60deg;--b:5.7px;--o:0.71;--s:9.3s;--d:-2.2s;--f:0.8333"><b></b></i>
+      <i style="--a:90deg;--b:7.6px;--o:0.58;--s:8s;--d:-6.8s;--f:0.75"><b></b></i><i style="--a:120deg;--b:6.4px;--o:0.79;--s:6.7s;--d:-3.2s;--f:0.6667"><b></b></i><i style="--a:150deg;--b:5.3px;--o:0.66;--s:8.8s;--d:-0.8s;--f:0.5833"><b></b></i>
+      <i style="--a:180deg;--b:7.1px;--o:0.53;--s:7.5s;--d:-5.3s;--f:0.5"><b></b></i><i style="--a:210deg;--b:6px;--o:0.74;--s:6.2s;--d:-2s;--f:0.4167"><b></b></i><i style="--a:240deg;--b:7.8px;--o:0.61;--s:8.3s;--d:-7.8s;--f:0.3333"><b></b></i>
+      <i style="--a:270deg;--b:6.7px;--o:0.83;--s:7s;--d:-3.9s;--f:0.25"><b></b></i><i style="--a:300deg;--b:5.5px;--o:0.69;--s:9.1s;--d:-1.6s;--f:0.1667"><b></b></i><i style="--a:330deg;--b:7.4px;--o:0.56;--s:7.8s;--d:-6.2s;--f:0.0833"><b></b></i>
+      </div></div>
+    </div>
+
     <img src="varliklar/nodia-enso-480.png" alt="Nodia Collective mührü — altın bir enso çemberi ve bronz nokta" width="480" height="480">
   </div>
 
   <h1 class="acil"><span>NODIA</span><span>COLLECTIVE</span></h1>
 
   <!-- ⭑ VARSAYILAN HEDEF BURADA, script'te DEĞİL. Böylece JavaScript hiç
-       çalışmasa bile düğme canlıdır ve doğru yere gider. Script yalnızca
-       iPhone/iPad istisnasını işler. -->
+       çalışmasa bile düğme canlıdır ve doğru yere gider. -->
   <a class="cta acil" id="cta" rel="noopener"
-     href="https://play.google.com/store/apps/details?id=com.nodiacollective.app">Başvur</a>
+     href="https://play.google.com/store/apps/details?id=com.nodiacollective.app">BAŞVUR</a>
 </main>
 
 <footer class="acil">
   <ul>
-    <li>© 2026 Nodia</li>
+    <li><a href="mailto:info@nodiacollective.com">İletişim</a></li>
     <li><a href="kullanim-sartlari/">Kullanım Şartları</a></li>
     <li><a href="gizlilik/">Gizlilik Politikası</a></li>
+    <li>© 2026 Nodia</li>
   </ul>
 </footer>
 
@@ -404,9 +456,8 @@ footer {animation-delay:210ms}
    iOS İSTİSNASI — sayfanın TEK JavaScript'i.
 
    Varsayılan (HTML'deki) hedef Play'dir ve herkes için çalışır. Burada
-   yalnızca tek bir şey yapılır: ziyaretçi iPhone/iPad ise ve iOS uygulaması
-   henüz yayında değilse, düğme sessiz "Yakında" haline ÇEKİLİR — çünkü bir
-   iPhone kullanıcısını Play listesine göndermek anlamsız olurdu.
+   yalnızca ziyaretçi iPhone/iPad ise ve iOS uygulaması henüz yayında
+   değilse düğme sessiz "YAKINDA" haline ÇEKİLİR.
 
    ⛔ App Store yayınlandığı gün TEK SATIR değişir: `IOS` doldurulur.
    ⚠️ Play listesi ÜRETİM erişimi açılana kadar herkese 404 döner
@@ -414,9 +465,8 @@ footer {animation-delay:210ms}
       Çağkan bunu bilerek kabul etti: "en kötü direkt Play hesabına gitsin".
    ⚠️ iOS uygulaması bugün YOK [ÖLÇÜM: App Store bundle sorgusu 0 sonuç].
 
-   ⛔ Kütüphane yok, dış istek yok, çerez ve depolama yok; `navigator`
-      yalnız okunur, hiçbir yere gönderilmez ⇒ "sıfır üçüncü taraf" kuralı
-      ve Gizlilik Politikası olduğu gibi korunur.
+   ⛔ Kütüphane yok, dış istek yok, çerez ve depolama yok; `navigator` yalnız
+      okunur, hiçbir yere gönderilmez ⇒ "sıfır üçüncü taraf" kuralı korunur.
    ════════════════════════════════════════════════════════════════════════ */
 (function () {
   var IOS = null; // App Store yayınlanınca buraya URL yazılır
@@ -435,7 +485,7 @@ footer {animation-delay:210ms}
   dugme.removeAttribute('href');
   dugme.setAttribute('aria-disabled', 'true');
   dugme.classList.add('cta--bekleyen');
-  dugme.textContent = 'Yakında';
+  dugme.textContent = 'YAKINDA';
 })();
 </script>
 
