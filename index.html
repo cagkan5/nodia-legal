@@ -50,12 +50,14 @@
          merkezinde sıfır boyutlu bir çıpadır). Pencereye bağlıyken mühür
          kompozisyonun ÜSTÜNDE kaldığı için yörüngelerin merkezinde
          DURMUYORDU — Çağkan gördü, düzeltildi.
-      ⭑ İKİ AYRI DÖNÜŞ, ve ikisi de gerekli:
+      ⭑ İKİ AYRI HAREKET, ve ikisi de gerekli:
         (1) `nd-donus` — noktalar yörünge üzerinde yürür (16/22/34 sn).
-        (2) `nd-savrulma` — DÜZLEMİN KENDİSİ savrulur (78/104/140 sn, ortadaki
-            ters yönde). ⛔ Bu olmadan elips SABİT görünür: `rotateY` bir
+        (2) `nd-savrulma` — DÜZLEMİN KENDİSİ salınır (78/104/140 sn, üçü
+            farklı fazda). ⛔ Bu olmadan elips SABİT görünür: `rotateY` bir
             çemberi kendi üstüne eşler, yani yörünge çizgisi hiç kıpırdamaz,
             yalnız noktalar yürür. İlk 3B denemesinde tam bu oldu.
+            ⛔ Salınım TAM TUR DEĞİL: |--z| + |--sal| ≤ 35deg. Tam tur
+               `rotateZ`i 90°'den geçirir ve elips mührü DİK keser.
       ⭑ Adet yarıçapla ORANTILI (6 / 9 / 12) ⇒ noktalar arası YAY aralığı üç
         yörüngede de aynı; sayı keyfi değil, geometriden.
       ⭑ ÜÇ DERİNLİK İPUCU: perspektif (öne gelen BÜYÜR), `nd-derinlik`
@@ -174,17 +176,30 @@ body{
   width:var(--w);aspect-ratio:1;
   margin:calc(var(--w) / -2) 0 0 calc(var(--w) / -2);
   transform-style:preserve-3d;
-  animation:nd-savrulma var(--sv) linear infinite;
+  animation:nd-savrulma var(--sv) var(--nefes) var(--gec) infinite;
 }
-.yr-ic  {--rr:calc(var(--r) * 2/3);--w:calc(var(--r) * 4/3);--egim:36deg;--z:-12deg;--sp:16s;--sv:78s; --iz:rgba(198,163,90,.20)}
-.yr-orta{--rr:var(--r);            --w:calc(var(--r) * 2);  --egim:27deg;--z:7deg;  --sp:22s;--sv:104s;--iz:rgba(198,163,90,.13)}
-.yr-dis {--rr:calc(var(--r) * 4/3);--w:calc(var(--r) * 8/3);--egim:44deg;--z:-3deg; --sp:34s;--sv:140s;--iz:rgba(198,163,90,.08)}
-/* Orta yörünge ters savrulur — sistem tek yöne akan bir çark gibi durmasın. */
-.yr-orta{animation-direction:reverse}
+.yr-ic  {--rr:calc(var(--r) * 2/3);--w:calc(var(--r) * 4/3);--egim:36deg;--z:-8deg;--sal:26deg;--sp:16s;--sv:78s; --gec:0s;   --iz:rgba(198,163,90,.20)}
+.yr-orta{--rr:var(--r);            --w:calc(var(--r) * 2);  --egim:27deg;--z:6deg; --sal:28deg;--sp:22s;--sv:104s;--gec:-34s; --iz:rgba(198,163,90,.13)}
+.yr-dis {--rr:calc(var(--r) * 4/3);--w:calc(var(--r) * 8/3);--egim:44deg;--z:-3deg;--sal:30deg;--sp:34s;--sv:140s;--gec:-47s; --iz:rgba(198,163,90,.08)}
 
+/* ⛔ SAVRULMA TAM TUR DEĞİL, SALINIMDIR — ve bu bir kısıt, tercih değil.
+   Tam tur `rotateZ`i 90°'den geçirir; o anda yatık elipsin uzun ekseni
+   DİKLEŞİR ve mührü dik keser. Çağkan gördü: "çok dikey oluyor, max 35
+   derece kessin". Genlik `--sal`, taban açı `--z`; ikisinin toplamı üç
+   yörüngede de **35°'nin altında** tutulur:
+     iç   −8 ± 26 ⇒ −34° … +18°
+     orta  +6 ± 28 ⇒ −22° … +34°
+     dış   −3 ± 30 ⇒ −33° … +27°
+   ⛔ Yeni bir yörünge eklenirse ya da bu sayılar oynatılırsa
+      |--z| + |--sal| ≤ 35deg değişmezi KORUNMALIDIR.
+   ⭑ Zamanlama `linear` DEĞİL easeInOutSine: salınımın dönüş noktalarında
+     linear sert bir sıçrama üretir, sinüs yumuşak durur.
+   ⭑ Üçü farklı NEGATİF gecikmeyle başlar ⇒ aynı anda aynı yöne salınmazlar.
+      (`animation-direction:reverse` burada işe YARAMAZ — keyframe zamanda
+      simetrik olduğu için ters yön birebir aynı görüntüyü verir.) */
 @keyframes nd-savrulma{
-  from{transform:rotateZ(var(--z))}
-  to  {transform:rotateZ(calc(var(--z) + 360deg))}
+  0%,100%{transform:rotateZ(calc(var(--z) - var(--sal)))}
+  50%    {transform:rotateZ(calc(var(--z) + var(--sal)))}
 }
 
 /* İç katman: noktaların yörünge üzerinde YÜRÜMESİ. */
