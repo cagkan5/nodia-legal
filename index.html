@@ -140,13 +140,20 @@
   --nefes:cubic-bezier(0.37,0,0.63,1);   /* easeInOutSine (ambiyans) */
 
   /* Orta yörüngenin yarıçapı; diğer ikisi 200:300:400 oranından.
-     ⛔ `29vh` ŞART — yalnız `vw` ile sınırlanınca alçak/geniş pencerede dış
-        yörüngenin üstü ekrandan TAŞIYOR. Çağkan canlıda gördü: "açar açmaz
-        çok yukarıda başlıyor, hepsi gözüksün".
-     ⚠️ Görünen yarıçap `--r × 4/3` DEĞİL, ondan ~%19 daha büyüktür: perspektif
-        yakın kenarı büyütür, savrulma da kutuyu döndürür. Sınır seçilirken
-        geometrik değil ÖLÇÜLEN kutu esas alındı. */
-  --r:min(38vw,29vh,272px);
+     ⛔ Dikey sınır (`24vh`) ŞART — yalnız `vw` ile sınırlanınca alçak/geniş
+        pencerede dış yörüngenin üstü ekrandan taşıyor.
+     ⚠️ Görünen yarıçap `--r × 4/3` DEĞİL, ondan belirgin ölçüde büyüktür:
+        perspektif yakın kenarı büyütür. Sınır geometriden değil ÖLÇÜLEN
+        kutudan seçildi.
+     🔴 DIŞ ELİPSİN TEPESİ SABİT DEĞİL — animasyon boyunca ~200 px oynuyor ve
+        [ÖLÇÜM · izole edildi] bunun BÜYÜK kısmı SAVRULMADAN değil NOKTALARIN
+        DÖNÜŞÜNDEN geliyor: yalnız savrulma 142 px, yalnız dönüş 188 px.
+        Sebep perspektif — düzlem Y ekseninde dönerken yakın/uzak yarısı yer
+        değiştirir ve izdüşüm değişir. ⛔ Dönüş kısılamaz (noktaların yürümesi
+        odur), dolayısıyla "tepedeki boşluk" ancak BOYUT ve KONUM ile ayarlanır.
+        `--sal`ı küçültmek bu işte yanlış koldur; bir kez denendi, tepe
+        oynaması 219'dan ancak 199'a indi. */
+  --r:min(38vw,24vh,272px);
 }
 
 *{box-sizing:border-box}
@@ -230,18 +237,22 @@ body{
   from{--egim:90deg}
   to  {--egim:var(--hedef-egim)}
 }
-.yr-ic  {--rr:calc(var(--r) * 2/3);--w:calc(var(--r) * 4/3);--hedef-egim:36deg;--z:-8deg;--sal:26deg;--sp:16s;--sv:78s; --gec:0s;  --ag:200ms;   --iz:rgba(198,163,90,.20)}
-.yr-orta{--rr:var(--r);            --w:calc(var(--r) * 2);  --hedef-egim:27deg;--z:6deg; --sal:28deg;--sp:22s;--sv:104s;--gec:-34s;--ag:450ms; --iz:rgba(198,163,90,.13)}
-.yr-dis {--rr:calc(var(--r) * 4/3);--w:calc(var(--r) * 8/3);--hedef-egim:44deg;--z:-3deg;--sal:30deg;--sp:34s;--sv:140s;--gec:-47s;--ag:700ms; --iz:rgba(198,163,90,.08)}
+.yr-ic  {--rr:calc(var(--r) * 2/3);--w:calc(var(--r) * 4/3);--hedef-egim:36deg;--z:-8deg;--sal:15deg;--sp:16s;--sv:78s; --gec:0s;  --ag:200ms;   --iz:rgba(198,163,90,.20)}
+.yr-orta{--rr:var(--r);            --w:calc(var(--r) * 2);  --hedef-egim:27deg;--z:6deg; --sal:17deg;--sp:22s;--sv:104s;--gec:-34s;--ag:450ms; --iz:rgba(198,163,90,.13)}
+.yr-dis {--rr:calc(var(--r) * 4/3);--w:calc(var(--r) * 8/3);--hedef-egim:44deg;--z:-3deg;--sal:19deg;--sp:34s;--sv:140s;--gec:-47s;--ag:700ms; --iz:rgba(198,163,90,.08)}
 
 /* ⛔ SAVRULMA TAM TUR DEĞİL, SALINIMDIR — ve bu bir kısıt, tercih değil.
    Tam tur `rotateZ`i 90°'den geçirir; o anda yatık elipsin uzun ekseni
    DİKLEŞİR ve mührü dik keser. Çağkan gördü: "çok dikey oluyor, max 35
    derece kessin". Genlik `--sal`, taban açı `--z`; ikisinin toplamı üç
    yörüngede de **35°'nin altında** tutulur:
-     iç   −8 ± 26 ⇒ −34° … +18°
-     orta  +6 ± 28 ⇒ −22° … +34°
-     dış   −3 ± 30 ⇒ −33° … +27°
+     iç   −8 ± 15 ⇒ −23° … +7°
+     orta  +6 ± 17 ⇒ −11° … +23°
+     dış   −3 ± 19 ⇒ −22° … +16°
+   ⛔ Genlik bir tur 26/28/30'du; dış elipsin TEPESİ savrulmayla birlikte
+      219 px oynuyordu (ölçüldü, 1440×900) ⇒ bir fazda ekrandan taşıyor,
+      başka bir fazda tepede kocaman boşluk bırakıyordu. Kompozisyonu yukarı
+      çekmek TEK BAŞINA yetmezdi: salınım da kısılmak zorundaydı.
    ⛔ Yeni bir yörünge eklenirse ya da bu sayılar oynatılırsa
       |--z| + |--sal| ≤ 35deg değişmezi KORUNMALIDIR.
    ⭑ Zamanlama `linear` DEĞİL easeInOutSine: salınımın dönüş noktalarında
@@ -321,8 +332,9 @@ body{
    1440×820'de −37 px). Yalnız mühür akışta kalınca `main` yüksekliği =
    mühür yüksekliği olur ve mühür TAM merkeze oturur; yörüngeler de onunla
    birlikte simetrik hâle gelir. */
-main{position:relative;max-width:34rem;width:100%}
+main{position:relative;max-width:34rem;width:100%;margin-bottom:34vh}
 .alt{position:absolute;top:100%;left:0;right:0;margin-top:clamp(1.6rem,4.5vw,2.2rem)}
+.dugme-yuva{position:absolute;left:0;right:0;bottom:clamp(7rem,17vh,11rem);text-align:center}
 
 /* ── Mühür ─────────────────────────────────────────────────────────────── */
 .muhur{
@@ -332,14 +344,14 @@ main{position:relative;max-width:34rem;width:100%}
 }
 .muhur img{
   display:block;
-  width:clamp(108px,27vw,152px);height:auto;
+  width:clamp(100px,25vw,140px);height:auto;
   position:relative;z-index:1;
 }
 /* Nefes — mührün KENDİSİ değil, arkasındaki parıltı nefes alır. (K9'un
    değerleri: opaklık .45↔.9 · ölçek 1↔1.06 · 7 sn.) */
 .muhur::before{
   content:"";position:absolute;
-  width:clamp(154px,39vw,220px);aspect-ratio:1;border-radius:50%;
+  width:clamp(143px,36vw,204px);aspect-ratio:1;border-radius:50%;
   background:radial-gradient(circle,rgba(198,163,90,.22) 0%,rgba(198,163,90,0) 68%);
   animation:nd-nefes 7s var(--nefes) infinite;
   z-index:1;
@@ -450,7 +462,9 @@ a:focus-visible{outline:2px solid var(--altin);outline-offset:3px;border-radius:
       BİRLİKTE değişmek zorundadır — biri unutulursa ya çakışma ya taşma. */
 @media (max-height:800px){
   :root{--r:min(38vw,20vh,272px)}
+  main{margin-bottom:0}
   .alt{position:static}
+  .dugme-yuva{position:static;margin-top:clamp(2rem,6vw,2.75rem)}
 }
 /* Çok kısa pencerede (yatay telefon) şerit de akışa döner. */
 @media (max-height:640px){
@@ -524,8 +538,7 @@ footer  {animation-delay:210ms}
     <img src="varliklar/nodia-enso-480.png" alt="Nodia Collective mührü — altın bir enso çemberi ve bronz nokta" width="480" height="480">
   </div>
 
-  <div class="alt">
-  <h1 class="acil"><span>NODIA</span><span>COLLECTIVE</span></h1>
+  <h1 class="alt acil"><span>NODIA</span><span>COLLECTIVE</span></h1>
 
   <!-- ⛔ `href` YOK ve bu BİLİNÇLİ: uygulama hiçbir mağazada henüz YAYINDA
        değil. Play listesi kapalı testte olduğu için herkese 404 döner — canlı
@@ -533,9 +546,15 @@ footer  {animation-delay:210ms}
        hedefi olan platformda düğmeyi "BAŞVUR"a yükseltir.
        ⛔ FAIL-CLOSED: JavaScript çalışmazsa düğme bu hâlinde kalır. Ölü
           bağlantı ÜRETMEMEK, çalışan bağlantıyı garantilemekten önceliklidir. -->
-  <a class="cta cta--bekleyen acil" id="cta" aria-disabled="true">YAKINDA</a>
-  </div>
 </main>
+
+<!-- ⛔ Düğme `main`in DIŞINDA ve dipten sabitlenmiş: mühür ile kelime markası
+     yukarı çekilirken düğme YERİNDE KALSIN diye (Çağkan, 2 Eyl). Sarmalayıcı
+     şart — `.acil` açılış animasyonu `transform` sürüyor, ortalamak için
+     `translateX` eklenirse animasyon onu ezerdi. -->
+<div class="dugme-yuva acil">
+  <a class="cta cta--bekleyen" id="cta" aria-disabled="true">YAKINDA</a>
+</div>
 
 <footer class="acil">
   <ul>
