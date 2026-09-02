@@ -19,7 +19,7 @@
 
 <link rel="preload" as="font" type="font/woff2" href="varliklar/cinzel-500.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="varliklar/jost-400.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="varliklar/syne-700.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="varliklar/jost-500.woff2" crossorigin>
 
 <style>
 /* ════════════════════════════════════════════════════════════════════════
@@ -85,13 +85,11 @@
    ⭑ FONTLAR KENDİ SUNUCUMUZDA, CDN'DEN DEĞİL — Google Fonts her ziyaretçinin
       IP'sini üçüncü tarafa gönderirdi ve Gizlilik Politikası web sitesi için
       böyle bir aktarım BEYAN ETMİYOR. Lisans: varliklar/FONT-LISANSLARI.txt.
-      ⭑ DÜĞME JOST 600 — kelime markasından AYRI bir ses (ad tören, düğme
-        iş). Gerçek 600 yüzü bu iş için üretildi: değişken Jost'tan 600'de
-        sabitlenip yalnız Türkçe BÜYÜK harf kümesine altkümelendi (31 glif,
-        2.168 bayt). ⛔ Sentetik kalın YASAK — düğme bir ara Cinzel'di, ondan
-        önce de Jost 400 yüzüyle `font-weight:500` istiyordu ve tarayıcı
-        sahte kalın üretiyordu. [ÖLÇÜM: subset'ler Ş/ş/İ dahil gereken tüm
-        glifleri taşıyor.]
+      ⭑ DÜĞME JOST 500, BÜYÜK HARF, .27em ARALIK. Yeni bir aile eklenmedi;
+        değişken Jost'tan 500'de sabitlenip yalnız Türkçe BÜYÜK harf kümesine
+        altkümelendi (31 glif, 2.176 bayt). ⛔ Sentetik kalın YASAK — gerçek
+        500 yüzü yüklü. Tam gerekçe ve elenen adaylar `.cta` bloğunda.
+        [ÖLÇÜM: subset'ler Ş/İ dahil gereken tüm glifleri taşıyor.]
 
    ⭑ TEK ŞERİT, SAYFANIN DİBİNDE — üst nav YOK (Çağkan: "iletişim de aşağıda
       olsun"; sayfa tek ekran, aşağı yukarı inmek yok). Dört öğe: İletişim ·
@@ -118,12 +116,11 @@
   font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:"Jost";src:url("varliklar/jost-400.woff2") format("woff2");
   font-weight:400;font-style:normal;font-display:swap}
-/* ⭑ DÜĞMENİN YÜZÜ — sayfanın ÜÇÜNCÜ ailesi ve yalnız orada kullanılır.
-   Değişken Syne'den 700'de sabitlenip SADECE "Başvur"+"Yakında" harflerine
-   altkümelendi: 15 glif, 1.500 bayt. ⛔ Sentetik kalın kullanılmaz — gerçek
-   700 yüzü yüklü. Lisans: varliklar/FONT-LISANSLARI.txt (SIL OFL 1.1). */
-@font-face{font-family:"Syne";src:url("varliklar/syne-700.woff2") format("woff2");
-  font-weight:700;font-style:normal;font-display:swap}
+/* ⭑ Düğmenin yüzü de JOST — ama 500'de ve yalnız BÜYÜK harf kümesine
+   altkümelenmiş (31 glif, 2.176 bayt). Yeni bir aile eklenmedi.
+   ⛔ Sentetik kalın kullanılmaz — gerçek 500 yüzü yüklü. */
+@font-face{font-family:"Jost";src:url("varliklar/jost-500.woff2") format("woff2");
+  font-weight:500;font-style:normal;font-display:swap}
 
 :root{
   --gece:#1E1913;
@@ -370,10 +367,11 @@ h1 span{display:block}
      KARARLI bir geometrik sans (Jost 600). İkisi bilinçli olarak ayrı
      seslerdir — ad tören, düğme iş. Aynı yüz olsaydı düğme markanın bir
      parçası gibi okunur, bir EYLEM gibi değil. */
-  font-family:"Syne",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  font-weight:700;
-  font-size:clamp(.98rem,3.7vw,1.12rem);
-  letter-spacing:.02em;
+  font-family:"Jost",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-weight:500;
+  font-size:clamp(.92rem,3.5vw,1.06rem);
+  letter-spacing:.27em;
+  text-indent:.27em; /* sondaki harf boşluğunu geri al — optik ortalama */
   text-decoration:none;
   border:1px solid transparent;
   color:var(--murekkep);
@@ -504,7 +502,7 @@ footer  {animation-delay:210ms}
   <!-- ⭑ VARSAYILAN HEDEF BURADA, script'te DEĞİL. Böylece JavaScript hiç
        çalışmasa bile düğme canlıdır ve doğru yere gider. -->
   <a class="cta acil" id="cta" rel="noopener"
-     href="https://play.google.com/store/apps/details?id=com.nodiacollective.app">Başvur</a>
+     href="https://play.google.com/store/apps/details?id=com.nodiacollective.app">BAŞVUR</a>
 </main>
 
 <footer class="acil">
@@ -550,7 +548,7 @@ footer  {animation-delay:210ms}
   dugme.removeAttribute('href');
   dugme.setAttribute('aria-disabled', 'true');
   dugme.classList.add('cta--bekleyen');
-  dugme.textContent = 'Yakında';
+  dugme.textContent = 'YAKINDA';
 })();
 </script>
 
