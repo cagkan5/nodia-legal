@@ -193,18 +193,24 @@ body{
      sürer ⇒ birbirlerini ezmezler. */
   animation:
     nd-savrulma var(--sv) var(--nefes) var(--gec) infinite,
-    nd-acilis   4.2s      var(--nefes) var(--ag)  both;
+    nd-acilis   11s       var(--nefes) var(--ag)  both;
 }
 /* ⭑ Sayfa açılırken üç yörünge de TAM DAİRE (90°, kameraya bakan) başlar ve
    sonra kendi eğimine yatar (Çağkan: "tam daire gibi başlasın, sonradan
    oynasın").
-   ⭑ ÖNCE BEKLER, SONRA YAVAŞÇA YATAR: ~1 sn gecikme + 4,2 sn süre. Gecikme
-     boyunca daireler DURUR — `both` dolgusunun geriye doğru kısmı `from`
-     değerini (90°) tutar, ayrı bir kural gerekmez.
+   ⭑ ÖNCE BEKLER, SONRA ÇOK YAVAŞ YATAR: ~1,2-1,7 sn gecikme + 11 sn süre.
+     Gecikme boyunca daireler DURUR — `both` dolgusunun geriye doğru kısmı
+     `from` değerini (90°) tutar, ayrı bir kural gerekmez.
    ⛔ EĞRİ `--cikis` DEĞİL `--nefes`. Güçlü ease-out (`--cikis`) en hızlı
       hareketi t=0'a koyar; animasyon başlar başlamaz fırlıyordu ("yenileyince
-      hemen kayıyor"). easeInOutSine iki uçta da sıfır hızla başlar ⇒ açılış
-      süzülerek gelir. Süreyi uzatmak TEK BAŞINA bunu çözmezdi.
+      hemen kayıyor"). easeInOutSine iki uçta da sıfır hızla başlar.
+   ⭑ AYAR NOKTASI — "çok hızlı yatıyor" denirse değiştirilecek tek sayı
+     `nd-acilis`in SÜRESİDİR, eğri değil. easeInOutSine'ın TEPE hızı
+     ortalamanın 1,571 katıdır; 63°'lik yatış için tepe hız = 99 / süre
+     (°/sn). 4,2 sn ⇒ 23,6 °/sn (hızlı bulundu) · 11 sn ⇒ **9,0 °/sn**.
+     Daha yavaş isteniyorsa süre oranla büyütülür.
+   ⛔ Eğriyi `linear`e çekmek tepe hızı düşürür (1,00×) ama başlangıcı yine
+      sert yapar — o, zaten çürütülmüş olan ilk şikâyete geri döner.
    ⭑ Savrulmaya ayrıca gecikme GEREKMEZ: tam dairede `rotateZ` görünmez
      (daire kendi üstüne eşlenir), yani salınım ancak elips oluşmaya
      başlayınca fark edilir hâle gelir. */
@@ -212,9 +218,9 @@ body{
   from{--egim:90deg}
   to  {--egim:var(--hedef-egim)}
 }
-.yr-ic  {--rr:calc(var(--r) * 2/3);--w:calc(var(--r) * 4/3);--hedef-egim:36deg;--z:-8deg;--sal:26deg;--sp:16s;--sv:78s; --gec:0s;  --ag:1000ms;   --iz:rgba(198,163,90,.20)}
-.yr-orta{--rr:var(--r);            --w:calc(var(--r) * 2);  --hedef-egim:27deg;--z:6deg; --sal:28deg;--sp:22s;--sv:104s;--gec:-34s;--ag:1150ms; --iz:rgba(198,163,90,.13)}
-.yr-dis {--rr:calc(var(--r) * 4/3);--w:calc(var(--r) * 8/3);--hedef-egim:44deg;--z:-3deg;--sal:30deg;--sp:34s;--sv:140s;--gec:-47s;--ag:1300ms; --iz:rgba(198,163,90,.08)}
+.yr-ic  {--rr:calc(var(--r) * 2/3);--w:calc(var(--r) * 4/3);--hedef-egim:36deg;--z:-8deg;--sal:26deg;--sp:16s;--sv:78s; --gec:0s;  --ag:1200ms;   --iz:rgba(198,163,90,.20)}
+.yr-orta{--rr:var(--r);            --w:calc(var(--r) * 2);  --hedef-egim:27deg;--z:6deg; --sal:28deg;--sp:22s;--sv:104s;--gec:-34s;--ag:1450ms; --iz:rgba(198,163,90,.13)}
+.yr-dis {--rr:calc(var(--r) * 4/3);--w:calc(var(--r) * 8/3);--hedef-egim:44deg;--z:-3deg;--sal:30deg;--sp:34s;--sv:140s;--gec:-47s;--ag:1700ms; --iz:rgba(198,163,90,.08)}
 
 /* ⛔ SAVRULMA TAM TUR DEĞİL, SALINIMDIR — ve bu bir kısıt, tercih değil.
    Tam tur `rotateZ`i 90°'den geçirir; o anda yatık elipsin uzun ekseni
