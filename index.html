@@ -139,8 +139,14 @@
   --cikis:cubic-bezier(0.23,1,0.32,1);   /* güçlü ease-out (giriş) */
   --nefes:cubic-bezier(0.37,0,0.63,1);   /* easeInOutSine (ambiyans) */
 
-  /* Orta yörüngenin yarıçapı; diğer ikisi 200:300:400 oranından. */
-  --r:min(40vw,272px);
+  /* Orta yörüngenin yarıçapı; diğer ikisi 200:300:400 oranından.
+     ⛔ `29vh` ŞART — yalnız `vw` ile sınırlanınca alçak/geniş pencerede dış
+        yörüngenin üstü ekrandan TAŞIYOR. Çağkan canlıda gördü: "açar açmaz
+        çok yukarıda başlıyor, hepsi gözüksün".
+     ⚠️ Görünen yarıçap `--r × 4/3` DEĞİL, ondan ~%19 daha büyüktür: perspektif
+        yakın kenarı büyütür, savrulma da kutuyu döndürür. Sınır seçilirken
+        geometrik değil ÖLÇÜLEN kutu esas alındı. */
+  --r:min(38vw,29vh,272px);
 }
 
 *{box-sizing:border-box}
@@ -305,16 +311,24 @@ body{
   50%    {opacity:calc(var(--o) * .18)}
 }
 
-/* ⭑ Kompozisyon pencerenin ORTASINDAN YUKARI çekilir (Çağkan: "daha
-   yukarıdan başlayabilir"). Sütun yönünde ortalanan tek akış öğesine alt
-   boşluk vermek, öğeyi o boşluğun YARISI kadar yukarı taşır. */
-main{position:relative;max-width:34rem;width:100%;margin-bottom:clamp(5rem,17vh,12rem)}
+/* ⛔ Kompozisyon TAM ORTALANIR. Bir tur yukarı çekilmişti ("daha yukarıdan
+   başlayabilir"); sonra Çağkan canlıda gördü ve çok yukarıda kaldığını,
+   yörüngelerin üstünün kesildiğini söyledi ⇒ çekme kaldırıldı. */
+/* ⛔ `main`in YÜKSEKLİĞİ = yalnız MÜHÜR. Kelime markası ve düğme akış
+   DIŞINDA, mührün altına asılır (`.alt`). Sebep geometrik: `main` ortalanıp
+   mühür de onun EN ÜSTÜNDE olunca mühür ekran merkezinin ~120 px üstünde
+   kalıyor ve mühre bağlı yörüngelerin üstü ekrandan taşıyordu (ölçüldü:
+   1440×820'de −37 px). Yalnız mühür akışta kalınca `main` yüksekliği =
+   mühür yüksekliği olur ve mühür TAM merkeze oturur; yörüngeler de onunla
+   birlikte simetrik hâle gelir. */
+main{position:relative;max-width:34rem;width:100%}
+.alt{position:absolute;top:100%;left:0;right:0;margin-top:clamp(1.6rem,4.5vw,2.2rem)}
 
 /* ── Mühür ─────────────────────────────────────────────────────────────── */
 .muhur{
   position:relative;
   display:grid;place-items:center;
-  margin:0 auto clamp(1.6rem,4.5vw,2.2rem);
+  margin:0 auto;
 }
 .muhur img{
   display:block;
@@ -424,8 +438,21 @@ footer a:focus-visible{color:var(--altin)}
 a:focus-visible{outline:2px solid var(--altin);outline-offset:3px;border-radius:2px}
 .cta:focus-visible{border-radius:999px;outline-offset:4px}
 
-/* Kısa pencerede (yatay telefon) iki şerit de akışa döner; sütun yönü
-   sayesinde üst-orta-alt sırasıyla dizilirler. */
+/* ── Alçak pencere kolları ─────────────────────────────────────────────── */
+/* ⛔ Mührü merkeze oturtan `.alt{position:absolute}` düzeni ancak yeterli
+   dikey pay varken güvenlidir: metin bloğu mührün ALTINA asıldığı için
+   pencere alçaldıkça şeride yaklaşır. [ÖLÇÜM: 1440×820 sorunsuz — metin
+   728'de biterken şerit 754'te başlıyor; 1440×700 ÇAKIŞIYOR.] Eşiğin altında
+   `.alt` akışa döner: mühür artık tam merkezde değil ama hiçbir şey üst üste
+   binmez.
+   ⚠️ Akış düzeninde mühür merkezin ÜSTÜNDE kalır ve yörüngeler yeniden
+      taşmaya başlar; o yüzden `--r`nin dikey sınırı da kısılır. İki ayar
+      BİRLİKTE değişmek zorundadır — biri unutulursa ya çakışma ya taşma. */
+@media (max-height:800px){
+  :root{--r:min(38vw,20vh,272px)}
+  .alt{position:static}
+}
+/* Çok kısa pencerede (yatay telefon) şerit de akışa döner. */
 @media (max-height:640px){
   footer{position:static;margin-top:clamp(2rem,6vw,3rem)}
 }
@@ -497,12 +524,17 @@ footer  {animation-delay:210ms}
     <img src="varliklar/nodia-enso-480.png" alt="Nodia Collective mührü — altın bir enso çemberi ve bronz nokta" width="480" height="480">
   </div>
 
+  <div class="alt">
   <h1 class="acil"><span>NODIA</span><span>COLLECTIVE</span></h1>
 
-  <!-- ⭑ VARSAYILAN HEDEF BURADA, script'te DEĞİL. Böylece JavaScript hiç
-       çalışmasa bile düğme canlıdır ve doğru yere gider. -->
-  <a class="cta acil" id="cta" rel="noopener"
-     href="https://play.google.com/store/apps/details?id=com.nodiacollective.app">BAŞVUR</a>
+  <!-- ⛔ `href` YOK ve bu BİLİNÇLİ: uygulama hiçbir mağazada henüz YAYINDA
+       değil. Play listesi kapalı testte olduğu için herkese 404 döner — canlı
+       bir sayfada ölü bağlantı bırakmaktansa düğme beklemede kalır. Script,
+       hedefi olan platformda düğmeyi "BAŞVUR"a yükseltir.
+       ⛔ FAIL-CLOSED: JavaScript çalışmazsa düğme bu hâlinde kalır. Ölü
+          bağlantı ÜRETMEMEK, çalışan bağlantıyı garantilemekten önceliklidir. -->
+  <a class="cta cta--bekleyen acil" id="cta" aria-disabled="true">YAKINDA</a>
+  </div>
 </main>
 
 <footer class="acil">
@@ -516,39 +548,50 @@ footer  {animation-delay:210ms}
 
 <script>
 /* ════════════════════════════════════════════════════════════════════════
-   iOS İSTİSNASI — sayfanın TEK JavaScript'i.
+   MAĞAZA HEDEFLERİ — sayfanın TEK JavaScript'i ve TEK KAYNAK.
 
-   Varsayılan (HTML'deki) hedef Play'dir ve herkes için çalışır. Burada
-   yalnızca ziyaretçi iPhone/iPad ise ve iOS uygulaması henüz yayında
-   değilse düğme sessiz "YAKINDA" haline ÇEKİLİR.
-
-   ⛔ App Store yayınlandığı gün TEK SATIR değişir: `IOS` doldurulur.
-   ⚠️ Play listesi ÜRETİM erişimi açılana kadar herkese 404 döner
-      [ÖLÇÜM · 2 Eyl 2026: HTTP 404; pozitif kontrol Spotify aynı yoldan 200].
-      Çağkan bunu bilerek kabul etti: "en kötü direkt Play hesabına gitsin".
+   ⛔ `null` = uygulama o platformda HENÜZ YAYINDA DEĞİL ⇒ düğme HTML'deki
+      "YAKINDA" hâlinde kalır ve hiçbir yere bağlanmaz.
+   ⭑ ÜRETİM GÜNÜ TEK SATIR: `android` doldurulur; düğme kendiliğinden
+      "BAŞVUR" olur ve Play'e gider. App Store için de `ios`.
+   ⚠️ Android linki ancak Play'de ÜRETİM yayını başladıktan sonra doldurulur:
+      kapalı testte liste sayfası herkese 404 döner [ÖLÇÜM · 2 Eyl 2026:
+      HTTP 404; pozitif kontrol Spotify aynı yoldan 200]. Sayfa 2 Eyl'de kısa
+      süre doğrudan Play'e bağlandı, sonra Çağkan üretime kadar "YAKINDA"
+      olmasını istedi.
    ⚠️ iOS uygulaması bugün YOK [ÖLÇÜM: App Store bundle sorgusu 0 sonuç].
 
    ⛔ Kütüphane yok, dış istek yok, çerez ve depolama yok; `navigator` yalnız
       okunur, hiçbir yere gönderilmez ⇒ "sıfır üçüncü taraf" kuralı korunur.
    ════════════════════════════════════════════════════════════════════════ */
 (function () {
-  var IOS = null; // App Store yayınlanınca buraya URL yazılır
+  var MAGAZA = {
+    android: null, // üretim yayını açılınca: "https://play.google.com/store/apps/details?id=com.nodiacollective.app"
+    ios:     null  // App Store yayınlanınca doldurulur
+  };
 
   var dugme = document.getElementById('cta');
   if (!dugme) return;
 
   var ua = navigator.userAgent || '';
   // iPadOS 13+ kendini "Macintosh" diye tanıtır; dokunma noktası sayısı ayırt eder.
-  var iOSmu = /iPad|iPhone|iPod/.test(ua) ||
-              (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
-  if (!iOSmu) return; // Android, masaüstü ve diğerleri HTML'deki haliyle kalır
+  var iOSmu   = /iPad|iPhone|iPod/.test(ua) ||
+                (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var android = /Android/.test(ua);
 
-  if (IOS) { dugme.setAttribute('href', IOS); return; }
+  // ⛔ Android kullanıcısını App Store'a, iPhone kullanıcısını Play'e YOLLAMA.
+  //    Yalnız masaüstünde (oraya zaten kurulum yapılamaz) dolu olan hangisiyse o.
+  var hedef = iOSmu   ? MAGAZA.ios
+            : android ? MAGAZA.android
+            : (MAGAZA.android || MAGAZA.ios);
 
-  dugme.removeAttribute('href');
-  dugme.setAttribute('aria-disabled', 'true');
-  dugme.classList.add('cta--bekleyen');
-  dugme.textContent = 'YAKINDA';
+  if (!hedef) return; // yayında değil ⇒ "YAKINDA" hâli korunur
+
+  dugme.setAttribute('href', hedef);
+  dugme.setAttribute('rel', 'noopener');
+  dugme.removeAttribute('aria-disabled');
+  dugme.classList.remove('cta--bekleyen');
+  dugme.textContent = 'BAŞVUR';
 })();
 </script>
 
