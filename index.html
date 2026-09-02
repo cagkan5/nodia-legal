@@ -133,6 +133,12 @@
   --bronz:#B36A3C;
   --kum:#E5D8C0;
   --sessiz:#9A9285;
+  /* ⭑ Düğme mürekkebi. UYDURULMADI — kilitli paletten türetildi:
+     Gece %80 + Bronz %20. Gece'nin kendisi (kontrast 7.30) altın zeminde
+     SİYAH okunuyordu; bu ton sıcaklığı geri getirir ve AA'nın rahat üstünde
+     kalır. [ÖLÇÜM: #3C291B / #C6A35A = 5.76, AA eşiği 4.5.]
+     ⛔ Daha da ısıtılacaksa alt sınır #5A3E22'dir (4.09) — o EŞİĞİN ALTI. */
+  --murekkep:#3C291B;
 
   --cikis:cubic-bezier(0.23,1,0.32,1);   /* güçlü ease-out (giriş) */
   --nefes:cubic-bezier(0.37,0,0.63,1);   /* easeInOutSine (ambiyans) */
@@ -371,10 +377,9 @@ h1 span{display:block}
   letter-spacing:.015em;
   text-decoration:none;
   border:1px solid transparent;
-  color:var(--gece);
+  color:var(--murekkep);
   /* ⭑ DÜZ altın, gradyan DEĞİL. Gradyanlı hap "premium düğme"nin şablon
-     cevabıdır; düz zemin daha kararlı durur. [ÖLÇÜM: Gece / #C6A35A = 7.30,
-     AA eşiği 4.5.] */
+     cevabıdır; düz zemin daha kararlı durur. */
   background-color:var(--altin);
   transition:background-color 180ms ease,border-color 180ms ease,color 180ms ease;
 }
